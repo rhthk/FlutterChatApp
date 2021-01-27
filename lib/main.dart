@@ -1,6 +1,5 @@
 // import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/model/contact.dart';
 import 'package:flutterapp/ui/home.dart';
 // import 'package:flutterapp/ui/test.dart';
 import 'ui/ChatScreen.dart';

@@ -1,24 +1,17 @@
 import 'dart:core';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 
-class ChatScreenArgs{
-  String name,lastSeen;
-  ChatScreenArgs({this.name,this.lastSeen});
-}
 // ignore: must_be_immutable
 class ChatScreen extends StatelessWidget {
   String name,lastSeen;
-  ChatScreen({this.name,this.lastSeen});
   @override
   Widget build(BuildContext context) {
 
-    final ChatScreen args = ModalRoute.of(context).settings.arguments;
+    final Map args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: _appBar(args.name, args.lastSeen),
-      // appBar: _appBar(((name==null)?"Name":name),((lastSeen==null)?"Inactive":lastSeen)),
+      appBar: _appBar(context,args['name'], args['status']),
       body: Container(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
@@ -33,7 +26,7 @@ class ChatScreen extends StatelessWidget {
     );
   }
 
-  AppBar _appBar(String title,String status) {
+  AppBar _appBar(BuildContext context,String title,String status) {
     return AppBar(
       brightness: Brightness.dark,
       backgroundColor: Colors.white,
@@ -67,7 +60,7 @@ class ChatScreen extends StatelessWidget {
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: () {
-          // Navigator.pushNamed(context, "homeScreen");
+          Navigator.pop(context);
         },
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/model/contact.dart';
-import 'ChatScreen.dart';
 
 class ListContact extends StatefulWidget {
   @override
@@ -20,6 +19,7 @@ class _ListContactState extends State<ListContact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),//TODO:
       persistentFooterButtons: <Widget>[
         RaisedButton(
           child: Text(
@@ -78,16 +78,20 @@ class _ListContactState extends State<ListContact> {
         sizeFactor: animation,
         axis: Axis.vertical,
         child: ListTile(
-          leading: CircleAvatar(
-            child: Icon(Icons.message),
+          leading: Hero(
+            tag: item.fname,
+            child: CircleAvatar(
+              child: Icon(Icons.account_circle),
+            ),
           ),
           title: Text(item.fname, style: textStyle),
           subtitle: Text(item.status),
           onTap: () {
-            // print(item.fname);
-            Navigator.pushNamed(context,"chatScreen",arguments:[
-              ChatScreen(name: item.fname,lastSeen: item.status,)
-            ]);
+            Navigator.pushNamed(context,"chatScreen",arguments:
+              {'name':item.fname,
+                'status':item.status,
+              }
+            );
           },
         ),
       ),

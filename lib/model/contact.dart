@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class Contact{
   int id,number;
   String fname,lname,status;
