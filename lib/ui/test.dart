@@ -85,9 +85,7 @@ class _ListContactState extends State<ListContact> {
           subtitle: Text(item.status),
           onTap: () {
             // print(item.fname);
-            Navigator.pushNamed(context,"chatScreen",arguments:[
-              ChatScreen(name: item.fname,lastSeen: item.status,)
-            ]);
+            Navigator.pushNamed(context,"chatScreen",arguments:ChatScreenArgs(name: item.fname,lastSeen: "123",));
           },
         ),
       ),
@@ -105,7 +103,7 @@ class _ListContactState extends State<ListContact> {
 
     _listKey.currentState.removeItem(
       0,
-          (BuildContext context, Animation<double> animation) =>
+      (BuildContext context, Animation<double> animation) =>
           _buildItem(context, itemToRemove, animation,0),
       duration: const Duration(milliseconds: 250),
     );
@@ -120,7 +118,7 @@ class _ListContactState extends State<ListContact> {
       Contact itemToRemove = _data[0];
       _listKey.currentState.removeItem(
         0,
-            (BuildContext context, Animation<double> animation) =>
+        (BuildContext context, Animation<double> animation) =>
             _buildItem(context, itemToRemove, animation,i),
         duration: const Duration(milliseconds: 250),
       );
