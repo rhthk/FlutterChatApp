@@ -19,12 +19,11 @@ class _ListContactState extends State<ListContact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),//TODO:
+      appBar: _appBar("title"),
       persistentFooterButtons: <Widget>[
         RaisedButton(
           child: Text(
-            'Add an item',
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            'Add',
           ),
           onPressed: () {
             _addAnItem();
@@ -33,7 +32,6 @@ class _ListContactState extends State<ListContact> {
         RaisedButton(
           child: Text(
             'Remove last',
-            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
           onPressed: () {
             _removeLastItem();
@@ -42,7 +40,6 @@ class _ListContactState extends State<ListContact> {
         RaisedButton(
           child: Text(
             'Remove all',
-            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
           onPressed: () {
             _removeAllItems();
@@ -131,4 +128,31 @@ class _ListContactState extends State<ListContact> {
       _data.removeAt(0);
     }
   }
+
+ AppBar _appBar(String title) {
+    return AppBar(
+      title: Text(title),
+      leading: Icon(Icons.message),
+      backgroundColor: Colors.white,
+      elevation: 0.0,
+      actions: [
+        PopupMenuButton<String>(
+          onSelected: (arg){
+            if(arg=="Profile")
+              Navigator.pushNamed(context, "myAccountScreen");
+            else if(arg=="Settings")
+              Navigator.pushNamed(context, "settingsScreen");
+          },
+          itemBuilder: (BuildContext context) {
+            return {'Profile', 'Settings'}.map((String choice) {
+              return PopupMenuItem<String>(
+                value: choice,
+                child: Text(choice),
+              );
+            }).toList();
+          },
+        ),
+      ],
+    );
+ }
 }

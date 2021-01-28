@@ -51,7 +51,14 @@ class ChatScreen extends StatelessWidget {
               print(trace);
             },
             backgroundImage: NetworkImage(""),
-            child: Icon(Icons.face),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, "accountScreen",arguments: {
+                  'name':title
+                });
+                },
+                child: Icon(Icons.face),
+            ),
           ),
         ),
         Padding(padding: EdgeInsets.fromLTRB(10, 0, 0, 0)),
@@ -69,7 +76,7 @@ class ChatScreen extends StatelessWidget {
   Container bottomNavigationBar(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: (MediaQuery.of(context).size.height * 0.1),
+      height:65.0,//(MediaQuery.of(context).size.height * 0.1),
       color: Colors.black12,
       child: FractionallySizedBox(
         heightFactor: 0.9,
