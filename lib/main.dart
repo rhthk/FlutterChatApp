@@ -1,11 +1,8 @@
-// import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/model/contact.dart';
 import 'package:flutterapp/ui/ListContactScreen.dart';
 import 'package:flutterapp/ui/MyAccountScreen.dart';
 import 'package:flutterapp/ui/SettingsScreen.dart';
 import 'package:flutterapp/ui/test.dart';
-// import 'package:flutterapp/ui/test.dart';
 import 'ui/ChatScreen.dart';
 
 // void backgroundFetchHeadlessTask(String taskId) async {

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutterapp/model/contact.dart';
 
@@ -8,10 +9,11 @@ class ListContact extends StatefulWidget {
 
 class _ListContactState extends State<ListContact> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
+
   List<Contact> _data = [
-    Contact(5, "Lorem", "R", "huhu", 10),
-    Contact(6, "Ipsum", "P", "kuku", 10),
-    Contact(5, "dolor", "Q", "aaaa", 10)
+    Contact(5, "Lorem", "R", "huhu", 10,"https://picsum.photos/id/123/200"),
+    Contact(6, "Ipsum", "P", "kuku", 10,"https://picsum.photos/id/135/200"),
+    Contact(5, "Dolor", "Q", "aaaa", 10,"https://picsum.photos/id/234/200")
   ];
 
   int counter=0;
@@ -19,7 +21,7 @@ class _ListContactState extends State<ListContact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar("title"),
+      appBar: _appBar("App"),
       persistentFooterButtons: <Widget>[
         RaisedButton(
           child: Text(
@@ -77,16 +79,20 @@ class _ListContactState extends State<ListContact> {
         child: ListTile(
           leading: Hero(
             tag: item.fname,
-            child: CircleAvatar(
-              child: Icon(Icons.account_circle),
+            child: CircleAvatar(onBackgroundImageError: (obj,trace){print(obj);},
+              backgroundImage: NetworkImage(item.url),
+              // child: Icon(Icons.account_circle),
             ),
           ),
           title: Text(item.fname, style: textStyle),
           subtitle: Text(item.status),
           onTap: () {
             Navigator.pushNamed(context,"chatScreen",arguments:
-              {'name':item.fname,
+              {'fname':item.fname,
+                'lname':item.lname,
                 'status':item.status,
+                'number':item.number,
+                'image':item.url,
               }
             );
           },
@@ -97,7 +103,7 @@ class _ListContactState extends State<ListContact> {
 
   void _addAnItem() {
     counter++;
-    _data.insert(0, Contact(3, counter.toString(), counter.toString(), counter.toString(), 26));
+    _data.insert(0, Contact(3, counter.toString(), counter.toString(), counter.toString(), 26,"https://picsum.photos/id/$counter/200/300"));
     _listKey.currentState.insertItem(0);
   }
 

@@ -11,22 +11,30 @@ class ChatScreen extends StatelessWidget {
 
     final Map args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: _appBar(context,args['name'], args['status']),
-      body: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          color: Colors.black12,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
-        ),
-        width: (MediaQuery.of(context).size.width),
-        height: (MediaQuery.of(context).size.height),
+      appBar: _appBar(context,args),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.black12,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+              ),
+              width: (MediaQuery.of(context).size.width),
+              // height: (MediaQuery.of(context).size.height*0.8),
+            ),
+          ),
+          bottomNavigationBar(context),
+          // SizedBox(height: MediaQuery.of(context).viewInsets.bottom,),
+        ],
       ),
-      bottomNavigationBar: bottomNavigationBar(context),
+      // bottomNavigationBar: bottomNavigationBar(context),
     );
   }
 
-  AppBar _appBar(BuildContext context,String title,String status) {
+  AppBar _appBar(BuildContext context,Map arg) {
     return AppBar(
       brightness: Brightness.dark,
       backgroundColor: Colors.white,
@@ -34,9 +42,9 @@ class ChatScreen extends StatelessWidget {
       elevation: 0.0,
       title: Column(
         children: [
-          Text(title),
+          Text(arg['fname']),
           Text(
-            status,
+            arg['status'],
             style: TextStyle(
               fontSize: 10,
             ),
@@ -45,19 +53,23 @@ class ChatScreen extends StatelessWidget {
       ),
       actions: [
         Hero(
-          tag: title,
+          tag: arg['fname'],
           child: CircleAvatar(
             onBackgroundImageError: (obj, trace) {
               print(trace);
             },
-            backgroundImage: NetworkImage(""),
+            backgroundImage: NetworkImage(arg['image']),
             child: GestureDetector(
               onTap: (){
                 Navigator.pushNamed(context, "accountScreen",arguments: {
-                  'name':title
+                  'fname':arg['fname'],
+                  'image':arg['image'],
+                  'lname':arg['lname'],
+                  'status':arg['status'],
+                  'number':arg['number']
                 });
                 },
-                child: Icon(Icons.face),
+                // child: Icon(Icons.face),
             ),
           ),
         ),
