@@ -1,50 +1,79 @@
 import 'dart:core';
 import 'dart:ui';
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutterapp/model/messageModel.dart';
 
 // ignore: must_be_immutable
-class ChatScreen extends StatelessWidget {
-  String name,lastSeen;
+class ChatScreen extends StatefulWidget {
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  String name, lastSeen;
+  // List<Message> _messages;
+  Message msg;
+  List<String> messages = [
+    "Hello",
+    "Si",
+    "sfaim",
+    "unfosfnv",
+    "afoisof",
+  ];
+
   @override
   Widget build(BuildContext context) {
-
     final Map args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: _appBar(context,args),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.black12,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+      appBar: _appBar(context, args),
+      body: Container(
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Theme.of(context).canvasColor,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
+                      bottomLeft: Radius.circular(25.0),
+                      bottomRight: Radius.circular(25.0)),
+                ),
+                width: (MediaQuery.of(context).size.width),
+                child: ListView.builder(
+                  itemCount: messages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Bubble(
+                      padding: BubbleEdges.all(2),
+                      alignment: Alignment.center,
+                      color: Color.fromRGBO(212, 234, 244, 1.0),
+                      child: Text(messages[index],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 11.0)),
+                    );
+                  },
+                ),
+                // height: (MediaQuery.of(context).size.height*0.8),
               ),
-              width: (MediaQuery.of(context).size.width),
-              // height: (MediaQuery.of(context).size.height*0.8),
             ),
-          ),
-          bottomNavigationBar(context),
-          // SizedBox(height: MediaQuery.of(context).viewInsets.bottom,),
-        ],
+            bottomNavigationBar(context),
+          ],
+        ),
       ),
       // bottomNavigationBar: bottomNavigationBar(context),
     );
   }
 
-  AppBar _appBar(BuildContext context,Map arg) {
+  AppBar _appBar(BuildContext context, Map arg) {
     return AppBar(
-      brightness: Brightness.dark,
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
       elevation: 0.0,
       title: Column(
         children: [
-          Text(arg['fname']),
+          Text(arg['name']['firstName']),
           Text(
-            arg['status'],
+            arg['isOnline']?"online":arg['lastActive'],
             style: TextStyle(
               fontSize: 10,
             ),
@@ -53,23 +82,27 @@ class ChatScreen extends StatelessWidget {
       ),
       actions: [
         Hero(
-          tag: arg['fname'],
+          tag: arg['number'],
           child: CircleAvatar(
             onBackgroundImageError: (obj, trace) {
               print(trace);
             },
             backgroundImage: NetworkImage(arg['image']),
             child: GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, "accountScreen",arguments: {
-                  'fname':arg['fname'],
-                  'image':arg['image'],
-                  'lname':arg['lname'],
-                  'status':arg['status'],
-                  'number':arg['number']
+              onTap: () {
+                Navigator.pushNamed(context, "accountScreen", arguments: {
+                  'name': {
+                    'firstName': arg['name']['firstName'],
+                    'lastName': arg['name']['lastName'],
+                  },
+                  'image': arg['image'],
+                  'status': arg['status'],
+                  'number': arg['number'],
+                  'lastActive': arg['lastActive'],
+                  'isOnline': arg['isOnline'],
                 });
-                },
-                // child: Icon(Icons.face),
+              },
+              // child: Icon(Icons.face),
             ),
           ),
         ),
@@ -88,8 +121,8 @@ class ChatScreen extends StatelessWidget {
   Container bottomNavigationBar(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height:65.0,//(MediaQuery.of(context).size.height * 0.1),
-      color: Colors.black12,
+      height: 65.0, //(MediaQuery.of(context).size.height * 0.1),
+      // color: Colors.white,
       child: FractionallySizedBox(
         heightFactor: 0.9,
         widthFactor: 0.95,
@@ -133,15 +166,15 @@ class ChatScreen extends StatelessWidget {
                 ),
                 Expanded(
                     child: TextField(
-                      decoration: new InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(left: 5, right: 5),
-                          hintText: "Type a message."),
-                    )),
+                  decoration: new InputDecoration(
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: 5, right: 5),
+                      hintText: "Type a message."),
+                )),
                 RawMaterialButton(
                   onPressed: () {},
                   // elevation: 2.0,

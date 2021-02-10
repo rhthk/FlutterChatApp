@@ -1,6 +1,5 @@
 class Message {
-  var now = DateTime.now();
-  String message,sender;
+  String message,time;
   int id;
-  Message(this.id,this.sender,this.message);
+  Message(this.id,this.message);
 }

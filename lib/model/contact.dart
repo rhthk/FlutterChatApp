@@ -1,18 +1,20 @@
-class Contact{
-  int id,number;
-  String fname,lname,status,url;
-  Contact(this.id,this.fname,this.lname,this.status,this.number,this.url);
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'fname': fname,
-      'lname': lname,
-      'status': status,
-      'number': number,
-      'imageUrl': url,
-    };}
-    @override
-    String toString() {
-      return 'Contact{id: $id, fname: $fname, lname: $lname, status: $status, number: $number}';
-    }
+class Contact {
+  int id, number;
+  bool isOnline;
+  String firstName, lastName, status, url, lastActive;
+  // Map<String,String> name ;
+  Contact(this.id, this.firstName, this.lastName, this.status, this.number,
+      this.url, this.lastActive, this.isOnline);
+
+  factory Contact.fromJson(Map<String, dynamic> json) {
+    return Contact(
+        1,
+        json['name']['firstName'],
+        json['name']['lastName'],
+        json['status'],
+        json['number'],
+        json['url']==""?"https://picsum.photos/600":json['url'],
+        json['lastActive'],
+        json['isOnline']);
+  }
 }
