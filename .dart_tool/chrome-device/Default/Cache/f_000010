@@ -1,0 +1,776 @@
+define(['dart_sdk', 'packages/flutter/src/animation/animation_controller.dart', 'packages/flutter/src/widgets/widget_span.dart', 'packages/flutter/src/animation/listener_helpers.dart', 'packages/flutter/src/painting/basic_types.dart', 'packages/flutter/src/foundation/debug.dart', 'packages/flutter/src/painting/edge_insets.dart', 'packages/flutter/src/widgets/scroll_view.dart', 'packages/flutter/src/foundation/collections.dart'], (function load__packages__flutter__src__widgets__animated_list_dart(dart_sdk, packages__flutter__src__animation__animation_controller$46dart, packages__flutter__src__widgets__widget_span$46dart, packages__flutter__src__animation__listener_helpers$46dart, packages__flutter__src__painting__basic_types$46dart, packages__flutter__src__foundation__debug$46dart, packages__flutter__src__painting__edge_insets$46dart, packages__flutter__src__widgets__scroll_view$46dart, packages__flutter__src__foundation__collections$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _interceptors = dart_sdk._interceptors;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const animation_controller = packages__flutter__src__animation__animation_controller$46dart.src__animation__animation_controller;
+  const framework = packages__flutter__src__widgets__widget_span$46dart.src__widgets__framework;
+  const scroll_controller = packages__flutter__src__widgets__widget_span$46dart.src__widgets__scroll_controller;
+  const scroll_physics = packages__flutter__src__widgets__widget_span$46dart.src__widgets__scroll_physics;
+  const basic = packages__flutter__src__widgets__widget_span$46dart.src__widgets__basic;
+  const widget_inspector = packages__flutter__src__widgets__widget_span$46dart.src__widgets__widget_inspector;
+  const ticker_provider = packages__flutter__src__widgets__widget_span$46dart.src__widgets__ticker_provider;
+  const sliver = packages__flutter__src__widgets__widget_span$46dart.src__widgets__sliver;
+  const animation = packages__flutter__src__animation__listener_helpers$46dart.src__animation__animation;
+  const animations = packages__flutter__src__animation__listener_helpers$46dart.src__animation__animations;
+  const basic_types = packages__flutter__src__painting__basic_types$46dart.src__painting__basic_types;
+  const assertions = packages__flutter__src__foundation__debug$46dart.src__foundation__assertions;
+  const diagnostics = packages__flutter__src__foundation__debug$46dart.src__foundation__diagnostics;
+  const edge_insets = packages__flutter__src__painting__edge_insets$46dart.src__painting__edge_insets;
+  const scroll_view = packages__flutter__src__widgets__scroll_view$46dart.src__widgets__scroll_view;
+  const collections = packages__flutter__src__foundation__collections$46dart.src__foundation__collections;
+  var animated_list = Object.create(dart.library);
+  var $compareTo = dartx.compareTo;
+  var $followedBy = dartx.followedBy;
+  var $removeAt = dartx.removeAt;
+  var $_get = dartx._get;
+  var $add = dartx.add;
+  var $sort = dartx.sort;
+  dart._checkModuleNullSafetyMode(false);
+  var JSArrayOfDiagnosticsNode = () => (JSArrayOfDiagnosticsNode = dart.constFn(_interceptors.JSArray$(diagnostics.DiagnosticsNode)))();
+  var VoidTobool = () => (VoidTobool = dart.constFn(dart.fnType(core.bool, [])))();
+  var GlobalKeyOfSliverAnimatedListState = () => (GlobalKeyOfSliverAnimatedListState = dart.constFn(framework.GlobalKey$(animated_list.SliverAnimatedListState)))();
+  var _LocationL = () => (_LocationL = dart.constFn(dart.legacy(widget_inspector._Location)))();
+  var JSArrayOfWidget = () => (JSArrayOfWidget = dart.constFn(_interceptors.JSArray$(framework.Widget)))();
+  var JSArrayOf_ActiveItem = () => (JSArrayOf_ActiveItem = dart.constFn(_interceptors.JSArray$(animated_list._ActiveItem)))();
+  var VoidTovoid = () => (VoidTovoid = dart.constFn(dart.fnType(dart.void, [])))();
+  var voidToNull = () => (voidToNull = dart.constFn(dart.fnType(core.Null, [dart.void])))();
+  const CT = Object.create(null);
+  var L0 = "file:///D:/ROHITH/sdk/flutter/packages/flutter/lib/src/widgets/animated_list.dart";
+  var L1 = "package:flutter/src/widgets/animated_list.dart";
+  dart.defineLazy(CT, {
+    get C0() {
+      return C0 = dart.const({
+        __proto__: basic_types.Axis.prototype,
+        [_name]: "Axis.vertical",
+        index: 1
+      });
+    },
+    get C1() {
+      return C1 = dart.const({
+        __proto__: core.Duration.prototype,
+        [Duration__duration]: 300000
+      });
+    },
+    get C2() {
+      return C2 = dart.const({
+        __proto__: edge_insets.EdgeInsets.prototype,
+        [EdgeInsets_bottom]: 0,
+        [EdgeInsets_right]: 0,
+        [EdgeInsets_top]: 0,
+        [EdgeInsets_left]: 0
+      });
+    },
+    get C5() {
+      return C5 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "key",
+        [_Location_column]: 13,
+        [_Location_line]: 503,
+        [_Location_file]: null
+      });
+    },
+    get C6() {
+      return C6 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "itemBuilder",
+        [_Location_column]: 13,
+        [_Location_line]: 504,
+        [_Location_file]: null
+      });
+    },
+    get C7() {
+      return C7 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "initialItemCount",
+        [_Location_column]: 13,
+        [_Location_line]: 505,
+        [_Location_file]: null
+      });
+    },
+    get C4() {
+      return C4 = dart.constList([C5 || CT.C5, C6 || CT.C6, C7 || CT.C7], _LocationL());
+    },
+    get C3() {
+      return C3 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C4 || CT.C4,
+        [_Location_name]: null,
+        [_Location_column]: 19,
+        [_Location_line]: 502,
+        [_Location_file]: "file:///D:/ROHITH/sdk/flutter/packages/flutter/lib/src/widgets/animated_list.dart"
+      });
+    },
+    get C10() {
+      return C10 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "padding",
+        [_Location_column]: 11,
+        [_Location_line]: 501,
+        [_Location_file]: null
+      });
+    },
+    get C11() {
+      return C11 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "sliver",
+        [_Location_column]: 11,
+        [_Location_line]: 502,
+        [_Location_file]: null
+      });
+    },
+    get C9() {
+      return C9 = dart.constList([C10 || CT.C10, C11 || CT.C11], _LocationL());
+    },
+    get C8() {
+      return C8 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C9 || CT.C9,
+        [_Location_name]: null,
+        [_Location_column]: 9,
+        [_Location_line]: 500,
+        [_Location_file]: "file:///D:/ROHITH/sdk/flutter/packages/flutter/lib/src/widgets/animated_list.dart"
+      });
+    },
+    get C14() {
+      return C14 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "scrollDirection",
+        [_Location_column]: 7,
+        [_Location_line]: 493,
+        [_Location_file]: null
+      });
+    },
+    get C15() {
+      return C15 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "reverse",
+        [_Location_column]: 7,
+        [_Location_line]: 494,
+        [_Location_file]: null
+      });
+    },
+    get C16() {
+      return C16 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "controller",
+        [_Location_column]: 7,
+        [_Location_line]: 495,
+        [_Location_file]: null
+      });
+    },
+    get C17() {
+      return C17 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "primary",
+        [_Location_column]: 7,
+        [_Location_line]: 496,
+        [_Location_file]: null
+      });
+    },
+    get C18() {
+      return C18 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "physics",
+        [_Location_column]: 7,
+        [_Location_line]: 497,
+        [_Location_file]: null
+      });
+    },
+    get C19() {
+      return C19 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "shrinkWrap",
+        [_Location_column]: 7,
+        [_Location_line]: 498,
+        [_Location_file]: null
+      });
+    },
+    get C20() {
+      return C20 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "slivers",
+        [_Location_column]: 7,
+        [_Location_line]: 499,
+        [_Location_file]: null
+      });
+    },
+    get C13() {
+      return C13 = dart.constList([C14 || CT.C14, C15 || CT.C15, C16 || CT.C16, C17 || CT.C17, C18 || CT.C18, C19 || CT.C19, C20 || CT.C20], _LocationL());
+    },
+    get C12() {
+      return C12 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C13 || CT.C13,
+        [_Location_name]: null,
+        [_Location_column]: 12,
+        [_Location_line]: 492,
+        [_Location_file]: "file:///D:/ROHITH/sdk/flutter/packages/flutter/lib/src/widgets/animated_list.dart"
+      });
+    },
+    get C23() {
+      return C23 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "delegate",
+        [_Location_column]: 7,
+        [_Location_line]: 1047,
+        [_Location_file]: null
+      });
+    },
+    get C22() {
+      return C22 = dart.constList([C23 || CT.C23], _LocationL());
+    },
+    get C21() {
+      return C21 = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C22 || CT.C22,
+        [_Location_name]: null,
+        [_Location_column]: 12,
+        [_Location_line]: 1046,
+        [_Location_file]: "file:///D:/ROHITH/sdk/flutter/packages/flutter/lib/src/widgets/animated_list.dart"
+      });
+    }
+  }, false);
+  animated_list._ActiveItem = class _ActiveItem extends core.Object {
+    compareTo(other) {
+      animated_list._ActiveItem.as(other);
+      if (other == null) dart.nullFailed(L0, 38, 29, "other");
+      return dart.notNull(this.itemIndex) - dart.notNull(other.itemIndex);
+    }
+  };
+  (animated_list._ActiveItem.incoming = function(controller, itemIndex) {
+    if (itemIndex == null) dart.nullFailed(L0, 27, 46, "itemIndex");
+    this.controller = controller;
+    this.itemIndex = itemIndex;
+    this.removedItemBuilder = null;
+    ;
+  }).prototype = animated_list._ActiveItem.prototype;
+  (animated_list._ActiveItem.outgoing = function(controller, itemIndex, removedItemBuilder) {
+    if (itemIndex == null) dart.nullFailed(L0, 28, 46, "itemIndex");
+    this.controller = controller;
+    this.itemIndex = itemIndex;
+    this.removedItemBuilder = removedItemBuilder;
+    ;
+  }).prototype = animated_list._ActiveItem.prototype;
+  (animated_list._ActiveItem.index = function(itemIndex) {
+    if (itemIndex == null) dart.nullFailed(L0, 29, 26, "itemIndex");
+    this.itemIndex = itemIndex;
+    this.controller = null;
+    this.removedItemBuilder = null;
+    ;
+  }).prototype = animated_list._ActiveItem.prototype;
+  dart.addTypeTests(animated_list._ActiveItem);
+  dart.addTypeCaches(animated_list._ActiveItem);
+  animated_list._ActiveItem[dart.implements] = () => [core.Comparable$(animated_list._ActiveItem)];
+  dart.setMethodSignature(animated_list._ActiveItem, () => ({
+    __proto__: dart.getMethods(animated_list._ActiveItem.__proto__),
+    compareTo: dart.fnType(core.int, [dart.nullable(core.Object)]),
+    [$compareTo]: dart.fnType(core.int, [dart.nullable(core.Object)])
+  }));
+  dart.setLibraryUri(animated_list._ActiveItem, L1);
+  dart.setFieldSignature(animated_list._ActiveItem, () => ({
+    __proto__: dart.getFields(animated_list._ActiveItem.__proto__),
+    controller: dart.finalFieldType(dart.nullable(animation_controller.AnimationController)),
+    removedItemBuilder: dart.finalFieldType(dart.nullable(dart.fnType(framework.Widget, [framework.BuildContext, animation.Animation$(core.double)]))),
+    itemIndex: dart.fieldType(core.int)
+  }));
+  dart.defineExtensionMethods(animated_list._ActiveItem, ['compareTo']);
+  var _name = dart.privateName(basic_types, "_name");
+  var C0;
+  var itemBuilder$ = dart.privateName(animated_list, "AnimatedList.itemBuilder");
+  var initialItemCount$ = dart.privateName(animated_list, "AnimatedList.initialItemCount");
+  var scrollDirection$ = dart.privateName(animated_list, "AnimatedList.scrollDirection");
+  var reverse$ = dart.privateName(animated_list, "AnimatedList.reverse");
+  var controller$ = dart.privateName(animated_list, "AnimatedList.controller");
+  var primary$ = dart.privateName(animated_list, "AnimatedList.primary");
+  var physics$ = dart.privateName(animated_list, "AnimatedList.physics");
+  var shrinkWrap$ = dart.privateName(animated_list, "AnimatedList.shrinkWrap");
+  var padding$ = dart.privateName(animated_list, "AnimatedList.padding");
+  animated_list.AnimatedList = class AnimatedList extends framework.StatefulWidget {
+    get itemBuilder() {
+      return this[itemBuilder$];
+    }
+    set itemBuilder(value) {
+      super.itemBuilder = value;
+    }
+    get initialItemCount() {
+      return this[initialItemCount$];
+    }
+    set initialItemCount(value) {
+      super.initialItemCount = value;
+    }
+    get scrollDirection() {
+      return this[scrollDirection$];
+    }
+    set scrollDirection(value) {
+      super.scrollDirection = value;
+    }
+    get reverse() {
+      return this[reverse$];
+    }
+    set reverse(value) {
+      super.reverse = value;
+    }
+    get controller() {
+      return this[controller$];
+    }
+    set controller(value) {
+      super.controller = value;
+    }
+    get primary() {
+      return this[primary$];
+    }
+    set primary(value) {
+      super.primary = value;
+    }
+    get physics() {
+      return this[physics$];
+    }
+    set physics(value) {
+      super.physics = value;
+    }
+    get shrinkWrap() {
+      return this[shrinkWrap$];
+    }
+    set shrinkWrap(value) {
+      super.shrinkWrap = value;
+    }
+    get padding() {
+      return this[padding$];
+    }
+    set padding(value) {
+      super.padding = value;
+    }
+    static of(context) {
+      if (context == null) dart.nullFailed(L0, 392, 44, "context");
+      if (!(context != null)) dart.assertFailed(null, L0, 393, 12, "context != null");
+      let result = context.findAncestorStateOfType(animated_list.AnimatedListState);
+      if (!dart.test(dart.fn(() => {
+        if (result == null) {
+          dart.throw(new assertions.FlutterError.fromParts(JSArrayOfDiagnosticsNode().of([new assertions.ErrorSummary.new("AnimatedList.of() called with a context that does not contain an AnimatedList."), new assertions.ErrorDescription.new("No AnimatedList ancestor could be found starting from the context that was passed to AnimatedList.of()."), new assertions.ErrorHint.new("This can happen when the context provided is from the same StatefulWidget that " + "built the AnimatedList. Please see the AnimatedList documentation for examples " + "of how to refer to an AnimatedListState object:" + "  https://api.flutter.dev/flutter/widgets/AnimatedListState-class.html"), context.describeElement("The context used was")])));
+        }
+        return true;
+      }, VoidTobool())())) dart.assertFailed(null, L0, 395, 12, "(){\r\n      if (result == null) {\r\n        throw FlutterError.fromParts(<DiagnosticsNode>[\r\n          ErrorSummary(\r\n            'AnimatedList.of() called with a context that does not contain an AnimatedList.'),\r\n          ErrorDescription(\r\n            'No AnimatedList ancestor could be found starting from the context that was passed to AnimatedList.of().'),\r\n          ErrorHint(\r\n            'This can happen when the context provided is from the same StatefulWidget that '\r\n            'built the AnimatedList. Please see the AnimatedList documentation for examples '\r\n            'of how to refer to an AnimatedListState object:'\r\n            '  https://api.flutter.dev/flutter/widgets/AnimatedListState-class.html'\r\n          ),\r\n          context.describeElement('The context used was')\r\n        ]);\r\n      }\r\n      return true;\r\n    }()");
+      return dart.nullCheck(result);
+    }
+    static maybeOf(context) {
+      if (context == null) dart.nullFailed(L0, 429, 50, "context");
+      if (!(context != null)) dart.assertFailed(null, L0, 430, 12, "context != null");
+      return context.findAncestorStateOfType(animated_list.AnimatedListState);
+    }
+    createState() {
+      return new animated_list.AnimatedListState.new();
+    }
+  };
+  (animated_list.AnimatedList.new = function(opts) {
+    let key = opts && 'key' in opts ? opts.key : null;
+    let itemBuilder = opts && 'itemBuilder' in opts ? opts.itemBuilder : null;
+    if (itemBuilder == null) dart.nullFailed(L0, 273, 19, "itemBuilder");
+    let initialItemCount = opts && 'initialItemCount' in opts ? opts.initialItemCount : 0;
+    if (initialItemCount == null) dart.nullFailed(L0, 274, 10, "initialItemCount");
+    let scrollDirection = opts && 'scrollDirection' in opts ? opts.scrollDirection : C0 || CT.C0;
+    if (scrollDirection == null) dart.nullFailed(L0, 275, 10, "scrollDirection");
+    let reverse = opts && 'reverse' in opts ? opts.reverse : false;
+    if (reverse == null) dart.nullFailed(L0, 276, 10, "reverse");
+    let controller = opts && 'controller' in opts ? opts.controller : null;
+    let primary = opts && 'primary' in opts ? opts.primary : null;
+    let physics = opts && 'physics' in opts ? opts.physics : null;
+    let shrinkWrap = opts && 'shrinkWrap' in opts ? opts.shrinkWrap : false;
+    if (shrinkWrap == null) dart.nullFailed(L0, 280, 10, "shrinkWrap");
+    let padding = opts && 'padding' in opts ? opts.padding : null;
+    let $36creationLocationd_0dea112b090073317d4 = opts && '$creationLocationd_0dea112b090073317d4' in opts ? opts.$creationLocationd_0dea112b090073317d4 : null;
+    this[itemBuilder$] = itemBuilder;
+    this[initialItemCount$] = initialItemCount;
+    this[scrollDirection$] = scrollDirection;
+    this[reverse$] = reverse;
+    this[controller$] = controller;
+    this[primary$] = primary;
+    this[physics$] = physics;
+    this[shrinkWrap$] = shrinkWrap;
+    this[padding$] = padding;
+    if (!(itemBuilder != null)) dart.assertFailed(null, L0, 282, 15, "itemBuilder != null");
+    if (!(initialItemCount != null && dart.notNull(initialItemCount) >= 0)) dart.assertFailed(null, L0, 283, 15, "initialItemCount != null && initialItemCount >= 0");
+    animated_list.AnimatedList.__proto__.new.call(this, {key: key, $creationLocationd_0dea112b090073317d4: $36creationLocationd_0dea112b090073317d4});
+    ;
+  }).prototype = animated_list.AnimatedList.prototype;
+  dart.addTypeTests(animated_list.AnimatedList);
+  dart.addTypeCaches(animated_list.AnimatedList);
+  dart.setMethodSignature(animated_list.AnimatedList, () => ({
+    __proto__: dart.getMethods(animated_list.AnimatedList.__proto__),
+    createState: dart.fnType(animated_list.AnimatedListState, [])
+  }));
+  dart.setLibraryUri(animated_list.AnimatedList, L1);
+  dart.setFieldSignature(animated_list.AnimatedList, () => ({
+    __proto__: dart.getFields(animated_list.AnimatedList.__proto__),
+    itemBuilder: dart.finalFieldType(dart.fnType(framework.Widget, [framework.BuildContext, core.int, animation.Animation$(core.double)])),
+    initialItemCount: dart.finalFieldType(core.int),
+    scrollDirection: dart.finalFieldType(basic_types.Axis),
+    reverse: dart.finalFieldType(core.bool),
+    controller: dart.finalFieldType(dart.nullable(scroll_controller.ScrollController)),
+    primary: dart.finalFieldType(dart.nullable(core.bool)),
+    physics: dart.finalFieldType(dart.nullable(scroll_physics.ScrollPhysics)),
+    shrinkWrap: dart.finalFieldType(core.bool),
+    padding: dart.finalFieldType(dart.nullable(edge_insets.EdgeInsetsGeometry))
+  }));
+  var _sliverAnimatedListKey = dart.privateName(animated_list, "_sliverAnimatedListKey");
+  var Duration__duration = dart.privateName(core, "Duration._duration");
+  var C1;
+  var EdgeInsets_bottom = dart.privateName(edge_insets, "EdgeInsets.bottom");
+  var EdgeInsets_right = dart.privateName(edge_insets, "EdgeInsets.right");
+  var EdgeInsets_top = dart.privateName(edge_insets, "EdgeInsets.top");
+  var EdgeInsets_left = dart.privateName(edge_insets, "EdgeInsets.left");
+  var C2;
+  var _Location_parameterLocations = dart.privateName(widget_inspector, "_Location.parameterLocations");
+  var _Location_name = dart.privateName(widget_inspector, "_Location.name");
+  var _Location_column = dart.privateName(widget_inspector, "_Location.column");
+  var _Location_line = dart.privateName(widget_inspector, "_Location.line");
+  var _Location_file = dart.privateName(widget_inspector, "_Location.file");
+  var C5;
+  var C6;
+  var C7;
+  var C4;
+  var C3;
+  var C10;
+  var C11;
+  var C9;
+  var C8;
+  var C14;
+  var C15;
+  var C16;
+  var C17;
+  var C18;
+  var C19;
+  var C20;
+  var C13;
+  var C12;
+  const State_TickerProviderStateMixin$36 = class State_TickerProviderStateMixin extends framework.State$(animated_list.AnimatedList) {};
+  (State_TickerProviderStateMixin$36.new = function() {
+    ticker_provider.TickerProviderStateMixin$(animated_list.AnimatedList)[dart.mixinNew].call(this);
+    State_TickerProviderStateMixin$36.__proto__.new.call(this);
+  }).prototype = State_TickerProviderStateMixin$36.prototype;
+  dart.applyMixin(State_TickerProviderStateMixin$36, ticker_provider.TickerProviderStateMixin$(animated_list.AnimatedList));
+  animated_list.AnimatedListState = class AnimatedListState extends State_TickerProviderStateMixin$36 {
+    insertItem(index, opts) {
+      if (index == null) dart.nullFailed(L0, 471, 23, "index");
+      let duration = opts && 'duration' in opts ? opts.duration : C1 || CT.C1;
+      if (duration == null) dart.nullFailed(L0, 471, 41, "duration");
+      dart.nullCheck(this[_sliverAnimatedListKey].currentState).insertItem(index, {duration: duration});
+    }
+    removeItem(index, builder, opts) {
+      if (index == null) dart.nullFailed(L0, 486, 23, "index");
+      if (builder == null) dart.nullFailed(L0, 486, 61, "builder");
+      let duration = opts && 'duration' in opts ? opts.duration : C1 || CT.C1;
+      if (duration == null) dart.nullFailed(L0, 486, 81, "duration");
+      dart.nullCheck(this[_sliverAnimatedListKey].currentState).removeItem(index, builder, {duration: duration});
+    }
+    build(context) {
+      let t0;
+      if (context == null) dart.nullFailed(L0, 491, 29, "context");
+      return new scroll_view.CustomScrollView.new({scrollDirection: this.widget.scrollDirection, reverse: this.widget.reverse, controller: this.widget.controller, primary: this.widget.primary, physics: this.widget.physics, shrinkWrap: this.widget.shrinkWrap, slivers: JSArrayOfWidget().of([new basic.SliverPadding.new({padding: (t0 = this.widget.padding, t0 == null ? C2 || CT.C2 : t0), sliver: new animated_list.SliverAnimatedList.new({key: this[_sliverAnimatedListKey], itemBuilder: this.widget.itemBuilder, initialItemCount: this.widget.initialItemCount, $creationLocationd_0dea112b090073317d4: C3 || CT.C3}), $creationLocationd_0dea112b090073317d4: C8 || CT.C8})]), $creationLocationd_0dea112b090073317d4: C12 || CT.C12});
+    }
+  };
+  (animated_list.AnimatedListState.new = function() {
+    this[_sliverAnimatedListKey] = GlobalKeyOfSliverAnimatedListState().new();
+    animated_list.AnimatedListState.__proto__.new.call(this);
+    ;
+  }).prototype = animated_list.AnimatedListState.prototype;
+  dart.addTypeTests(animated_list.AnimatedListState);
+  dart.addTypeCaches(animated_list.AnimatedListState);
+  dart.setMethodSignature(animated_list.AnimatedListState, () => ({
+    __proto__: dart.getMethods(animated_list.AnimatedListState.__proto__),
+    insertItem: dart.fnType(dart.void, [core.int], {duration: core.Duration}, {}),
+    removeItem: dart.fnType(dart.void, [core.int, dart.fnType(framework.Widget, [framework.BuildContext, animation.Animation$(core.double)])], {duration: core.Duration}, {}),
+    build: dart.fnType(framework.Widget, [framework.BuildContext])
+  }));
+  dart.setLibraryUri(animated_list.AnimatedListState, L1);
+  dart.setFieldSignature(animated_list.AnimatedListState, () => ({
+    __proto__: dart.getFields(animated_list.AnimatedListState.__proto__),
+    [_sliverAnimatedListKey]: dart.finalFieldType(framework.GlobalKey$(animated_list.SliverAnimatedListState))
+  }));
+  var itemBuilder$0 = dart.privateName(animated_list, "SliverAnimatedList.itemBuilder");
+  var initialItemCount$0 = dart.privateName(animated_list, "SliverAnimatedList.initialItemCount");
+  animated_list.SliverAnimatedList = class SliverAnimatedList extends framework.StatefulWidget {
+    get itemBuilder() {
+      return this[itemBuilder$0];
+    }
+    set itemBuilder(value) {
+      super.itemBuilder = value;
+    }
+    get initialItemCount() {
+      return this[initialItemCount$0];
+    }
+    set initialItemCount(value) {
+      super.initialItemCount = value;
+    }
+    createState() {
+      return new animated_list.SliverAnimatedListState.new();
+    }
+    static of(context) {
+      if (context == null) dart.nullFailed(L0, 807, 50, "context");
+      if (!(context != null)) dart.assertFailed(null, L0, 808, 12, "context != null");
+      let result = context.findAncestorStateOfType(animated_list.SliverAnimatedListState);
+      if (!dart.test(dart.fn(() => {
+        if (result == null) {
+          dart.throw(assertions.FlutterError.new("SliverAnimatedList.of() called with a context that does not contain a SliverAnimatedList.\n" + "No SliverAnimatedListState ancestor could be found starting from the " + "context that was passed to SliverAnimatedListState.of(). This can " + "happen when the context provided is from the same StatefulWidget that " + "built the AnimatedList. Please see the SliverAnimatedList documentation " + "for examples of how to refer to an AnimatedListState object: " + "https://docs.flutter.io/flutter/widgets/SliverAnimatedListState-class.html\n" + "The context used was:\n" + "  " + dart.str(context)));
+        }
+        return true;
+      }, VoidTobool())())) dart.assertFailed(null, L0, 810, 12, "(){\r\n      if (result == null) {\r\n        throw FlutterError(\r\n          'SliverAnimatedList.of() called with a context that does not contain a SliverAnimatedList.\\n'\r\n          'No SliverAnimatedListState ancestor could be found starting from the '\r\n          'context that was passed to SliverAnimatedListState.of(). This can '\r\n          'happen when the context provided is from the same StatefulWidget that '\r\n          'built the AnimatedList. Please see the SliverAnimatedList documentation '\r\n          'for examples of how to refer to an AnimatedListState object: '\r\n          'https://docs.flutter.io/flutter/widgets/SliverAnimatedListState-class.html\\n'\r\n          'The context used was:\\n'\r\n          '  $context');\r\n      }\r\n      return true;\r\n    }()");
+      return dart.nullCheck(result);
+    }
+    static maybeOf(context) {
+      if (context == null) dart.nullFailed(L0, 841, 56, "context");
+      if (!(context != null)) dart.assertFailed(null, L0, 842, 12, "context != null");
+      return context.findAncestorStateOfType(animated_list.SliverAnimatedListState);
+    }
+  };
+  (animated_list.SliverAnimatedList.new = function(opts) {
+    let key = opts && 'key' in opts ? opts.key : null;
+    let itemBuilder = opts && 'itemBuilder' in opts ? opts.itemBuilder : null;
+    if (itemBuilder == null) dart.nullFailed(L0, 767, 19, "itemBuilder");
+    let initialItemCount = opts && 'initialItemCount' in opts ? opts.initialItemCount : 0;
+    if (initialItemCount == null) dart.nullFailed(L0, 768, 10, "initialItemCount");
+    let $36creationLocationd_0dea112b090073317d4 = opts && '$creationLocationd_0dea112b090073317d4' in opts ? opts.$creationLocationd_0dea112b090073317d4 : null;
+    this[itemBuilder$0] = itemBuilder;
+    this[initialItemCount$0] = initialItemCount;
+    if (!(itemBuilder != null)) dart.assertFailed(null, L0, 769, 15, "itemBuilder != null");
+    if (!(initialItemCount != null && dart.notNull(initialItemCount) >= 0)) dart.assertFailed(null, L0, 770, 15, "initialItemCount != null && initialItemCount >= 0");
+    animated_list.SliverAnimatedList.__proto__.new.call(this, {key: key, $creationLocationd_0dea112b090073317d4: $36creationLocationd_0dea112b090073317d4});
+    ;
+  }).prototype = animated_list.SliverAnimatedList.prototype;
+  dart.addTypeTests(animated_list.SliverAnimatedList);
+  dart.addTypeCaches(animated_list.SliverAnimatedList);
+  dart.setMethodSignature(animated_list.SliverAnimatedList, () => ({
+    __proto__: dart.getMethods(animated_list.SliverAnimatedList.__proto__),
+    createState: dart.fnType(animated_list.SliverAnimatedListState, [])
+  }));
+  dart.setLibraryUri(animated_list.SliverAnimatedList, L1);
+  dart.setFieldSignature(animated_list.SliverAnimatedList, () => ({
+    __proto__: dart.getFields(animated_list.SliverAnimatedList.__proto__),
+    itemBuilder: dart.finalFieldType(dart.fnType(framework.Widget, [framework.BuildContext, core.int, animation.Animation$(core.double)])),
+    initialItemCount: dart.finalFieldType(core.int)
+  }));
+  var _incomingItems = dart.privateName(animated_list, "_incomingItems");
+  var _outgoingItems = dart.privateName(animated_list, "_outgoingItems");
+  var _itemsCount = dart.privateName(animated_list, "_itemsCount");
+  var _removeActiveItemAt = dart.privateName(animated_list, "_removeActiveItemAt");
+  var _activeItemAt = dart.privateName(animated_list, "_activeItemAt");
+  var _indexToItemIndex = dart.privateName(animated_list, "_indexToItemIndex");
+  var _itemIndexToIndex = dart.privateName(animated_list, "_itemIndexToIndex");
+  var _itemBuilder = dart.privateName(animated_list, "_itemBuilder");
+  var _createDelegate = dart.privateName(animated_list, "_createDelegate");
+  var C23;
+  var C22;
+  var C21;
+  const State_TickerProviderStateMixin$36$ = class State_TickerProviderStateMixin extends framework.State$(animated_list.SliverAnimatedList) {};
+  (State_TickerProviderStateMixin$36$.new = function() {
+    ticker_provider.TickerProviderStateMixin$(animated_list.SliverAnimatedList)[dart.mixinNew].call(this);
+    State_TickerProviderStateMixin$36$.__proto__.new.call(this);
+  }).prototype = State_TickerProviderStateMixin$36$.prototype;
+  dart.applyMixin(State_TickerProviderStateMixin$36$, ticker_provider.TickerProviderStateMixin$(animated_list.SliverAnimatedList));
+  animated_list.SliverAnimatedListState = class SliverAnimatedListState extends State_TickerProviderStateMixin$36$ {
+    initState() {
+      super.initState();
+      this[_itemsCount] = this.widget.initialItemCount;
+    }
+    dispose() {
+      for (let item of this[_incomingItems][$followedBy](this[_outgoingItems])) {
+        dart.nullCheck(item.controller).dispose();
+      }
+      super.dispose();
+    }
+    [_removeActiveItemAt](items, itemIndex) {
+      if (items == null) dart.nullFailed(L0, 891, 54, "items");
+      if (itemIndex == null) dart.nullFailed(L0, 891, 65, "itemIndex");
+      let i = collections.binarySearch(animated_list._ActiveItem, items, new animated_list._ActiveItem.index(itemIndex));
+      return i === -1 ? null : items[$removeAt](i);
+    }
+    [_activeItemAt](items, itemIndex) {
+      if (items == null) dart.nullFailed(L0, 896, 48, "items");
+      if (itemIndex == null) dart.nullFailed(L0, 896, 59, "itemIndex");
+      let i = collections.binarySearch(animated_list._ActiveItem, items, new animated_list._ActiveItem.index(itemIndex));
+      return i === -1 ? null : items[$_get](i);
+    }
+    [_indexToItemIndex](index) {
+      if (index == null) dart.nullFailed(L0, 907, 29, "index");
+      let itemIndex = index;
+      for (let item of this[_outgoingItems]) {
+        if (dart.notNull(item.itemIndex) <= dart.notNull(itemIndex))
+          itemIndex = dart.notNull(itemIndex) + 1;
+        else
+          break;
+      }
+      return itemIndex;
+    }
+    [_itemIndexToIndex](itemIndex) {
+      if (itemIndex == null) dart.nullFailed(L0, 918, 29, "itemIndex");
+      let index = itemIndex;
+      for (let item of this[_outgoingItems]) {
+        if (!(item.itemIndex != itemIndex)) dart.assertFailed(null, L0, 921, 14, "item.itemIndex != itemIndex");
+        if (dart.notNull(item.itemIndex) < dart.notNull(itemIndex))
+          index = dart.notNull(index) - 1;
+        else
+          break;
+      }
+      return index;
+    }
+    [_createDelegate]() {
+      return new sliver.SliverChildBuilderDelegate.new(dart.bind(this, _itemBuilder), {childCount: this[_itemsCount]});
+    }
+    insertItem(index, opts) {
+      let t0, t0$;
+      if (index == null) dart.nullFailed(L0, 940, 23, "index");
+      let duration = opts && 'duration' in opts ? opts.duration : C1 || CT.C1;
+      if (duration == null) dart.nullFailed(L0, 940, 41, "duration");
+      if (!(index != null && dart.notNull(index) >= 0)) dart.assertFailed(null, L0, 941, 12, "index != null && index >= 0");
+      if (!(duration != null)) dart.assertFailed(null, L0, 942, 12, "duration != null");
+      let itemIndex = this[_indexToItemIndex](index);
+      if (!(dart.notNull(itemIndex) >= 0 && dart.notNull(itemIndex) <= dart.notNull(this[_itemsCount]))) dart.assertFailed(null, L0, 945, 12, "itemIndex >= 0 && itemIndex <= _itemsCount");
+      for (let item of this[_incomingItems]) {
+        if (dart.notNull(item.itemIndex) >= dart.notNull(itemIndex)) {
+          t0 = item;
+          t0.itemIndex = dart.notNull(t0.itemIndex) + 1;
+        }
+      }
+      for (let item of this[_outgoingItems]) {
+        if (dart.notNull(item.itemIndex) >= dart.notNull(itemIndex)) {
+          t0$ = item;
+          t0$.itemIndex = dart.notNull(t0$.itemIndex) + 1;
+        }
+      }
+      let controller = new animation_controller.AnimationController.new({duration: duration, vsync: this});
+      let incomingItem = new animated_list._ActiveItem.incoming(controller, itemIndex);
+      this.setState(dart.fn(() => {
+        let t0;
+        t0 = this[_incomingItems];
+        (() => {
+          t0[$add](incomingItem);
+          t0[$sort]();
+          return t0;
+        })();
+        this[_itemsCount] = dart.notNull(this[_itemsCount]) + 1;
+      }, VoidTovoid()));
+      controller.forward().then(dart.void, dart.fn(_ => {
+        dart.nullCheck(dart.nullCheck(this[_removeActiveItemAt](this[_incomingItems], incomingItem.itemIndex)).controller).dispose();
+      }, voidToNull()));
+    }
+    removeItem(index, builder, opts) {
+      let t0, t0$;
+      if (index == null) dart.nullFailed(L0, 989, 23, "index");
+      if (builder == null) dart.nullFailed(L0, 989, 61, "builder");
+      let duration = opts && 'duration' in opts ? opts.duration : C1 || CT.C1;
+      if (duration == null) dart.nullFailed(L0, 989, 81, "duration");
+      if (!(index != null && dart.notNull(index) >= 0)) dart.assertFailed(null, L0, 990, 12, "index != null && index >= 0");
+      if (!(builder != null)) dart.assertFailed(null, L0, 991, 12, "builder != null");
+      if (!(duration != null)) dart.assertFailed(null, L0, 992, 12, "duration != null");
+      let itemIndex = this[_indexToItemIndex](index);
+      if (!(dart.notNull(itemIndex) >= 0 && dart.notNull(itemIndex) < dart.notNull(this[_itemsCount]))) dart.assertFailed(null, L0, 995, 12, "itemIndex >= 0 && itemIndex < _itemsCount");
+      if (!(this[_activeItemAt](this[_outgoingItems], itemIndex) == null)) dart.assertFailed(null, L0, 996, 12, "_activeItemAt(_outgoingItems, itemIndex) == null");
+      let incomingItem = this[_removeActiveItemAt](this[_incomingItems], itemIndex);
+      let controller = (t0$ = (t0 = incomingItem, t0 == null ? null : t0.controller), t0$ == null ? new animation_controller.AnimationController.new({duration: duration, value: 1.0, vsync: this}) : t0$);
+      let outgoingItem = new animated_list._ActiveItem.outgoing(controller, itemIndex, builder);
+      this.setState(dart.fn(() => {
+        let t0;
+        t0 = this[_outgoingItems];
+        (() => {
+          t0[$add](outgoingItem);
+          t0[$sort]();
+          return t0;
+        })();
+      }, VoidTovoid()));
+      controller.reverse().then(dart.void, dart.fn(value => {
+        let t0, t0$;
+        dart.nullCheck(dart.nullCheck(this[_removeActiveItemAt](this[_outgoingItems], outgoingItem.itemIndex)).controller).dispose();
+        for (let item of this[_incomingItems]) {
+          if (dart.notNull(item.itemIndex) > dart.notNull(outgoingItem.itemIndex)) {
+            t0 = item;
+            t0.itemIndex = dart.notNull(t0.itemIndex) - 1;
+          }
+        }
+        for (let item of this[_outgoingItems]) {
+          if (dart.notNull(item.itemIndex) > dart.notNull(outgoingItem.itemIndex)) {
+            t0$ = item;
+            t0$.itemIndex = dart.notNull(t0$.itemIndex) - 1;
+          }
+        }
+        this.setState(dart.fn(() => this[_itemsCount] = dart.notNull(this[_itemsCount]) - 1, VoidTovoid()));
+      }, voidToNull()));
+    }
+    [_itemBuilder](context, itemIndex) {
+      let t1, t0, t0$, t3, t2, t1$, t0$0;
+      if (context == null) dart.nullFailed(L0, 1026, 36, "context");
+      if (itemIndex == null) dart.nullFailed(L0, 1026, 49, "itemIndex");
+      let outgoingItem = this[_activeItemAt](this[_outgoingItems], itemIndex);
+      if (outgoingItem != null) {
+        return dart.nullCheck(outgoingItem.removedItemBuilder)(context, dart.nullCheck(outgoingItem.controller).view);
+      }
+      let incomingItem = this[_activeItemAt](this[_incomingItems], itemIndex);
+      let animation = (t0$ = (t0 = incomingItem, t0 == null ? null : (t1 = t0.controller, t1 == null ? null : t1.view)), t0$ == null ? animations.kAlwaysCompleteAnimation : t0$);
+      t0$0 = this.widget;
+      t1$ = context;
+      t2 = this[_itemIndexToIndex](itemIndex);
+      t3 = animation;
+      return t0$0.itemBuilder(t1$, t2, t3);
+    }
+    build(context) {
+      if (context == null) dart.nullFailed(L0, 1045, 29, "context");
+      return new sliver.SliverList.new({delegate: this[_createDelegate](), $creationLocationd_0dea112b090073317d4: C21 || CT.C21});
+    }
+  };
+  (animated_list.SliverAnimatedListState.new = function() {
+    this[_incomingItems] = JSArrayOf_ActiveItem().of([]);
+    this[_outgoingItems] = JSArrayOf_ActiveItem().of([]);
+    this[_itemsCount] = 0;
+    animated_list.SliverAnimatedListState.__proto__.new.call(this);
+    ;
+  }).prototype = animated_list.SliverAnimatedListState.prototype;
+  dart.addTypeTests(animated_list.SliverAnimatedListState);
+  dart.addTypeCaches(animated_list.SliverAnimatedListState);
+  dart.setMethodSignature(animated_list.SliverAnimatedListState, () => ({
+    __proto__: dart.getMethods(animated_list.SliverAnimatedListState.__proto__),
+    [_removeActiveItemAt]: dart.fnType(dart.nullable(animated_list._ActiveItem), [core.List$(animated_list._ActiveItem), core.int]),
+    [_activeItemAt]: dart.fnType(dart.nullable(animated_list._ActiveItem), [core.List$(animated_list._ActiveItem), core.int]),
+    [_indexToItemIndex]: dart.fnType(core.int, [core.int]),
+    [_itemIndexToIndex]: dart.fnType(core.int, [core.int]),
+    [_createDelegate]: dart.fnType(sliver.SliverChildDelegate, []),
+    insertItem: dart.fnType(dart.void, [core.int], {duration: core.Duration}, {}),
+    removeItem: dart.fnType(dart.void, [core.int, dart.fnType(framework.Widget, [framework.BuildContext, animation.Animation$(core.double)])], {duration: core.Duration}, {}),
+    [_itemBuilder]: dart.fnType(framework.Widget, [framework.BuildContext, core.int]),
+    build: dart.fnType(framework.Widget, [framework.BuildContext])
+  }));
+  dart.setLibraryUri(animated_list.SliverAnimatedListState, L1);
+  dart.setFieldSignature(animated_list.SliverAnimatedListState, () => ({
+    __proto__: dart.getFields(animated_list.SliverAnimatedListState.__proto__),
+    [_incomingItems]: dart.finalFieldType(core.List$(animated_list._ActiveItem)),
+    [_outgoingItems]: dart.finalFieldType(core.List$(animated_list._ActiveItem)),
+    [_itemsCount]: dart.fieldType(core.int)
+  }));
+  dart.defineLazy(animated_list, {
+    /*animated_list._kDuration*/get _kDuration() {
+      return C1 || CT.C1;
+    }
+  }, false);
+  dart.trackLibraries("packages/flutter/src/widgets/animated_list.dart", {
+    "package:flutter/src/widgets/animated_list.dart": animated_list
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["animated_list.dart"],"names":[],"mappings":"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","file":"../../../../../../../../../C:/packages/flutter/src/widgets/animated_list.dart.lib.js"}');
+  // Exports:
+  return {
+    src__widgets__animated_list: animated_list
+  };
+}));
+
+//# sourceMappingURL=animated_list.dart.lib.js.map
