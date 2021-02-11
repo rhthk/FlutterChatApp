@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/rohith/flutterapp/BuildConfig.java
- com.rohith.flutterapp.BuildConfig
