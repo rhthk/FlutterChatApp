@@ -5463,8 +5463,8 @@ kotlin.coroutines.experimental.SafeContinuation
 com.google.common.collect.TreeRangeMap
 com.google.common.collect.ImmutableMapKeySet
 org.intellij.lang.annotations.Identifier
-androidx.test.internal.statement.UiThreadStatement$1
 androidx.test.espresso.core.internal.deps.guava.base.Equivalence$Equals
+androidx.test.internal.statement.UiThreadStatement$1
 androidx.core.app.NotificationCompat$CarExtender$UnreadConversation
 kotlin.ranges.ULongProgression
 androidx.customview.R$id
