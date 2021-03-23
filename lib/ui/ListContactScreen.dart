@@ -137,9 +137,9 @@ class _ListContactState extends State<ListContact> {
   void _addAnItem() async {
     counter++;
     final List<Contact> contacts = await fetchContacts(http.Client());
-    if(contacts!=null){
+    // _data.insert(0, contacts.first);
     _data.insertAll(0, contacts);
-    _listKey.currentState.insertItem(0);}
+    _listKey.currentState.insertItem(0);
   }
 
   void _removeLastItem() {

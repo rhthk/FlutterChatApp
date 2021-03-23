@@ -3,13 +3,6 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
-.dart_tool/
-build/
-.github/
-integration_test/
-
-
-
 # Node artifact files
 node_modules/
 dist/
@@ -23,16 +16,12 @@ dist/
 # Log files
 *.log
 
-.dart-tool/
-.github/
-build/
-integration_test/
-
 # Package files
 *.jar
 
 # Maven
 target/
+dist/
 
 # JetBrains IDE
 .idea/
