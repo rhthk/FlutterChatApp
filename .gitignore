@@ -3,9 +3,9 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
-.dart_tool
-build
-integration_test
+.dart_tool/
+build/
+integration_test/
 
 # Node artifact files
 node_modules/
